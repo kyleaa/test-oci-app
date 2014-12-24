@@ -16,6 +16,12 @@
             $this->_collection->update(array('_id' => $this->mongo_data['_id']), $this->mongo_data);
             $this->mongo_data_orig = $this->mongo_data;
         }
+        
+        public function updateSubset($js) {
+        	$this->mongo_data_orig = array_merge($this->mongo_data_orig, $js);
+            $this->_collection->update(array('_id' => $this->mongo_data['_id']), $this->mongo_data_orig);
+            $this->mongo_data = array_merge($this->mongo_data, $js);
+        }
     }
     
 ?>
