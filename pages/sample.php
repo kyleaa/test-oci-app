@@ -95,6 +95,14 @@
             </div>
           </div>
 
+
+<h2>Data Sample</h2>
+<?php include_once('Query.php');
+var_dump(Query::executeFetchFirst('select * from USER_ROLE_PRIVS'
+,'oracle'));
+
+?>
+
           <h2 class="sub-header">Section title</h2>
           <div class="table-responsive">
             <table class="table table-striped">
@@ -226,6 +234,8 @@
         </div>
       </div>
     </div>
+    
+    <?php phpinfo(); ?>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
