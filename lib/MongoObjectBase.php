@@ -22,6 +22,10 @@
             $this->_collection->update(array('_id' => $this->mongo_data['_id']), $this->mongo_data_orig);
             $this->mongo_data = array_merge($this->mongo_data, $js);
         }
+        
+        public function getID() {
+          return $this->mongo_data['_id'];
+        }
     }
     
 ?>
