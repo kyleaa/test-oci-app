@@ -1,5 +1,5 @@
 (function(){
-	var app = angular.module('queryTerminal',['ngRoute','validation.match','$http']);
+	var app = angular.module('queryTerminal',['ngRoute','validation.match']);
 	
 	
 	app.config(['$routeProvider', function($routeProvider) {

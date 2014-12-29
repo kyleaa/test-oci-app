@@ -13,11 +13,11 @@
 		<h1 class="page-header">Encryption Test</h1>
 		<p>Plaintext: amuchlongerstringthatistobeencrypted</p>
 		<p>Ciphertext: <?php
-			$ciphertext = $_SESSION['user']->encryptServerPassword('amuchlongerstringthatistobeencrypted');
+			$ciphertext = $_SESSION['user']->encrypt('amuchlongerstringthatistobeencrypted');
 			echo $ciphertext;
 			?>
 		</p>
-		<p>Decrypted: <?php echo $_SESSION['user']->decryptServerPassword($ciphertext);
+		<p>Decrypted: <?php echo $_SESSION['user']->decrypt($ciphertext);
 		?>
 		</p>
 </div>

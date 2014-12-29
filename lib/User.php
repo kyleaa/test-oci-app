@@ -19,15 +19,16 @@
         }    
         public function getPassword() { return $this->mongo_data['password']; }
         
+        /*
         public function getServers() { return $this->mongo_data['servers']; }
         public function addServer($data) {
         	
         }
         public function removeServer($id) {
         	
-        }
+        } */
         
-        public function encryptServerPassword($password) { 
+        public function encrypt($password) { 
         	$key = $_SESSION['encryption_key'];
         	$key_size = strlen($key);
         	$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
@@ -37,7 +38,7 @@
         	return base64_encode($ciphertext);
         }
         
-        public function decryptServerPassword($ciphertext) {
+        public function decrypt($ciphertext) {
         	$key = $_SESSION['encryption_key'];
         	$ciphertext_dec = base64_decode($ciphertext);
         	$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
