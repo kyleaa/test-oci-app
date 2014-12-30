@@ -20,8 +20,9 @@
           return 'r';
         case 'PUT':
         case 'POST':
+          return 'w';
         case 'DELETE':
-          return 'rw';
+          return 'd';
         default:
           throw new Exception('Invalid http method');
       endswitch;

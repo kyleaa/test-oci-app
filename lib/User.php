@@ -8,6 +8,7 @@
         public function __construct($username) {
             $this->mongo_collection = 'users';
             $this->loadById($username);
+            if(!isset($this->mongo_data['servers'])) $this->mongo_data['servers'] = array();
         }
         
         public function getName() { return $this->mongo_data['name']; }
@@ -19,14 +20,33 @@
         }    
         public function getPassword() { return $this->mongo_data['password']; }
         
-        /*
+        
         public function getServers() { return $this->mongo_data['servers']; }
-        public function addServer($data) {
-        	
+        
+        public function setServers($array) {
+          /* Remove any existing servers that aren't in the array */
+          foreach($this->mongo_data['servers'] as $alias=>$server):
+            if(!isset($array[$alias])) $this->setServer($alias,array());
+          endforeach;
+          /* Update servers on the user */
+          foreach($array as $alias=>$server):
+            $this->setServer($alias, $server);
+          endforeach;
         }
-        public function removeServer($id) {
-        	
-        } */
+        
+        public function setServer($key,$data) {
+          if($data === null || count($data) == 0):
+            unset($this->mongo_data['servers'][$key]);
+          else:
+            $this->ensureRequiredFields($data,array('connect','username','password','max_connections'));
+            $data['password'] = $this->encrypt($data['password']);
+          	$this->mongo_data['servers'][$key] = $data;
+          endif;
+        }
+        
+        public function getServer($key) {
+        	return $this->mongo_data['servers'][$key];
+        }
         
         public function encrypt($password) { 
         	$key = $_SESSION['encryption_key'];

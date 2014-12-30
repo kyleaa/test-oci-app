@@ -5,15 +5,23 @@
   class API_User extends APIObject {
   
     public function __construct($id) {
-      $this->object = new User($id);
+      if ($id == '$self'):
+        $this->object = $_SESSION['user'];
+      else:
+        $this->object = new User($id);
+      endif;
+  
       $this->accessible_properties = array(
           'password' => 'w',
-          'name'     => 'rw'
+          'name'     => 'rw',
+          'servers'  => 'rw'
       );
+      
+      parent::__construct();
     }
     
     public function isAuthorized($mode) {
-      if ( $this->object->getID() == $_SESSION['user']->getID() ) {
+      if ( $this->object->getID() == $_SESSION['user']->getID() && $mode != 'd') {
         return true;
       } else {
         return false;

@@ -26,6 +26,16 @@
         public function getID() {
           return $this->mongo_data['_id'];
         }
+        
+        protected function ensureRequiredFields($data,$fields) {
+          foreach($fields as $field):
+            if(!isset($data[$field])) throw New Exception("Required field $field not populated");
+          endforeach;
+        }
+        
+        public function delete() {
+          $this->_collection->remove(array('_id' => $this->mongo_data['_id']));
+        }
     }
     
 ?>
