@@ -1,6 +1,6 @@
 <?php
 
-	set_include_path(get_include_path() . PATH_SEPARATOR . dirname(getcwd()) .'/lib/');
+  set_include_path(get_include_path() . PATH_SEPARATOR . dirname(getcwd()) .DIRECTORY_SEPARATOR .'lib' );
 	require_once('Config.php');
 	require_once('User.php');
 	require_once('Utilities.php');
@@ -13,7 +13,8 @@
       
       if(isset($_POST['password']) && isset($_POST['username'])):
           if ( User::Authenticate($_POST['username'],$_POST['password']) ):
-              $_SESSION['user'] = new User($_POST['username']);
+              $_SESSION['username'] = $_POST['username'];
+              $_SESSION['user'] = new User($_SESSION['username']);
               $_SESSION['encryption_key'] = $_SESSION['user']->getEncryptionKey($_POST['password']);
               Utilities::reloadPage();
           else:
@@ -27,9 +28,8 @@
           include('../pages/login.php');
       endif;
   else:
-  	if(isset($_GET['signout'])) { session_destroy(); Utilities::reloadPage(false);}
-  
-      include('../pages/sample.php');
+  	if(isset($_GET['signout'])) { session_destroy(); Utilities::reloadPage(false);}  
+    include('../pages/sample.php');
   endif;
     
 ?>

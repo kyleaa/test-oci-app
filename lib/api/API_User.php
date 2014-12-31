@@ -12,16 +12,18 @@
       endif;
   
       $this->accessible_properties = array(
-          'password' => 'w',
-          'name'     => 'rw',
-          'servers'  => 'rw'
+          'password'   => 'w',
+          'name'       => 'rw',
+          'servers'    => 'rw',
+          'email'      => 'rw',
+          'email_hash' => 'r'
       );
       
       parent::__construct();
     }
     
     public function isAuthorized($mode) {
-      if ( $this->object->getID() == $_SESSION['user']->getID() && $mode != 'd') {
+      if ( $this->object->getID() == $_SESSION['username'] && $mode != 'd') {
         return true;
       } else {
         return false;

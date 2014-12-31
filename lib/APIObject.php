@@ -36,8 +36,9 @@
     }
     
     public function updateFromArray($update) {
+      $this->debug[] = "update from array called with :" .var_export($update,true);
       foreach($this->accessible_properties as $prop => $mode):
-        if($mode == 'r' || $mode == 'rw' && isset($update[$prop])):
+        if(($mode == 'w' || $mode == 'rw') && isset($update[$prop])):
           $setter = APIObject::setterName($prop);
           if(is_callable(array($this->object,$setter))):
              $this->object->$setter($update[$prop]);
@@ -52,11 +53,11 @@
     }
     
     private static function getterName($property) {
-      return 'get' . ucwords($property);
+      return 'get' . str_replace('_','',ucwords($property));
     }
     
     private static function setterName($property) {
-      return 'set' . ucwords($property);
+      return 'set' . str_replace('_','',ucwords($property));
     }
     
     public function delete() {

@@ -1,5 +1,5 @@
 <?php 
-  set_include_path(get_include_path() . PATH_SEPARATOR . dirname(getcwd()) .'/lib/');
+  set_include_path(get_include_path() . PATH_SEPARATOR . dirname(getcwd()) .DIRECTORY_SEPARATOR .'lib');
   require_once('Config.php');
   require_once('User.php');
   require_once('Utilities.php');

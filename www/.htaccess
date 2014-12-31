@@ -1,2 +1,2 @@
 RewriteEngine on
-RewriteRule ^api/(.*) api.php?request=$1 [QSA]
+RewriteRule ^api/(.*).json$ api.php?request=$1 [QSA]
