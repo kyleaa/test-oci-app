@@ -56,5 +56,6 @@
     <script src="resources/js/angular-route.min.js"></script>
     <script src="resources/js/angular-input-match.js"></script>
     <script src="resources/js/app.js"></script>
+    <script src="resources/js/services/user.js"></script>
   </body>
 </html>

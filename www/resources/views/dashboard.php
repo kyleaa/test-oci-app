@@ -1,4 +1,10 @@
-<?php include_once('../../../lib/User.php'); session_start();?>
+<?php 
+  include_once('../../../lib/User.php'); 
+  require_once('../../../lib/Config.php');
+  session_start();
+  $config = new Config();
+  $_SESSION['user'] = new User($_SESSION['username']);
+?>
 <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar" ng-controller='SidebarController as sidebar'>
             <li ng-repeat="item in sidebar.items"><a href="{{item.id}}">{{item.name}}</a></li>
@@ -9,7 +15,7 @@
           <h1 class="page-header">Dashboard</h1>
 
        <p>Lorem Ipsem</p>
-       <p><?php var_dump($_SESSION); ?>
+       <p><?php var_dump($_SESSION['user']); ?>
 		<h1 class="page-header">Encryption Test</h1>
 		<p>Plaintext: amuchlongerstringthatistobeencrypted</p>
 		<p>Ciphertext: <?php

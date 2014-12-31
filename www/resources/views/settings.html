@@ -1,7 +1,7 @@
 <div class='col-md-6 col-md-offset-3' novalidate>
 <h1>Settings</h1>
 <h2>Change Password</h2>
-<form id='changePassword' name='changePassword' class='form-horizontal' ng-controller='PasswordController as ctrl' ng-submit='changePassword.$valid && ctrl.changePassword(user)'>
+<form id='changePassword' name='changePassword' class='form-horizontal' ng-submit='changePassword.$valid && ctrl.changePassword(user)'>
   <div class="form-group">
     <label for="password" class='control-label col-sm-3'>Password</label>
     <div class='col-sm-9'>
@@ -19,4 +19,8 @@
   <div class="alert alert-danger" ng-show="user.password.length && !(changePassword.$valid)"><span class='glyphicon glyphicon-remove'></span> Passwords do not match</div>
   <button>submit</button>
 </form>
-</div>
+
+<p>
+User: {{user._id}} <br />
+</p>
+</div> 

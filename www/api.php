@@ -24,6 +24,7 @@
         break;
       case 'w':
         $data = json_decode(file_get_contents("php://input"),true);
+        if ($data === null) throw new Exception('Invalid JSON data provided');
         $api_object->updateFromArray($data);
         $response = $api_object->toArray();
         break;
@@ -38,8 +39,11 @@
   }
   
   /* Add some debugging info to the API response */
+  
   //$response['_api']['mode'] = APIRouter::determineMode($_SERVER['REQUEST_METHOD']);
   //$response['_api']['debug'] = $api_object->getDebug();
+  //$response['_api']['object'] = var_export($api_object,true);
+  //$response['_api']['session'] = var_export($_SESSION,true);
   
   
   if(isset($error)) $response['error'] = $error;

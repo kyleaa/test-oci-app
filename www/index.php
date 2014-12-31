@@ -25,11 +25,11 @@
               $user->update();
           endif;
       else:
-          include('../pages/login.php');
+          include('..' . DIRECTORY_SEPARATOR . 'pages' . DIRECTORY_SEPARATOR . 'login.php');
       endif;
   else:
   	if(isset($_GET['signout'])) { session_destroy(); Utilities::reloadPage(false);}  
-    include('../pages/sample.php');
+    include('..' . DIRECTORY_SEPARATOR . 'pages' . DIRECTORY_SEPARATOR . 'sample.php');
   endif;
-    
+  
 ?>

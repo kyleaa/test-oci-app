@@ -9,11 +9,20 @@
             $this->mongo_collection = 'users';
             $this->loadById($username);
             if(!isset($this->mongo_data['servers'])) $this->mongo_data['servers'] = array();
+            if(!isset($this->mongo_data['salt'])):
+            	$temp = array();
+            	$temp['salt'] = base64_encode(mcrypt_create_iv(PBKDF2_SALT_BYTE_SIZE, MCRYPT_DEV_URANDOM));
+            	$this->updateSubset($temp);
+            endif;
         }
         
         public function getName() { return $this->mongo_data['name']; }
         public function setName($name) { $this->mongo_data['name'] = $name; }
-            
+        
+        public function setEmail($email) { $this->mongo_data['email'] = $email;}
+        public function getEmail() { return $this->mongo_data['email']; }
+        public function getEmailHash() { return md5($this->mongo_data['email']); }
+        
         public function setPassword($input) {
             $new_password = create_hash($input);
             $this->mongo_data['password'] = $new_password;
@@ -68,11 +77,6 @@
         }
         
 		public function getEncryptionKey($password) {
-			if(!isset($this->mongo_data['salt'])):
-				$temp = array();
-				$temp['salt'] = base64_encode(mcrypt_create_iv(PBKDF2_SALT_BYTE_SIZE, MCRYPT_DEV_URANDOM));
-				$this->updateSubset($temp);
-			endif;
 			return base64_encode(pbkdf2("sha256", $password, $this->mongo_data['salt'], 1000, 24, true));
 		}
 		
